@@ -1,0 +1,30 @@
+-- Create a table that doesn't satisfy 1NF
+CREATE TABLE Orders (
+    OrderID INT,
+    CustomerName varchar2(20),
+    Product varchar2(30)
+);
+DESC Orders;
+
+-- Insert data that doesn't satisfy 1NF
+INSERT INTO Orders VALUES (1, 'Alex', 'Apple, Banana');
+INSERT INTO Orders VALUES (2, 'Allson', 'Orange, Mango');
+INSERT INTO Orders VALUES (3, 'Oshan', 'Mango, Grapes');
+SELECT * FROM Orders;
+
+-- Transform the table and its data into 1NF
+CREATE TABLE Orders_1NF AS 
+SELECT OrderID, CustomerName, LTRIM(regexp_substr(Product, '[^,]+', 1, level)) Product 
+FROM Orders 
+CONNECT BY regexp_substr(Product, '[^,]+', 1, level) IS NOT NULL 
+AND PRIOR OrderID = OrderID 
+AND PRIOR SYS_GUID() IS NOT NULL; 
+DESC Orders_1NF;
+
+-- Display the table (it should be in 1NF now)
+COLUMN Product FORMAT A20
+SELECT * FROM Orders_1NF;
+
+-- Drop created tables
+DROP TABLE Orders;
+DROP TABLE Orders_1NF;

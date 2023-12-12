@@ -1,0 +1,114 @@
+SQL> -- Create a table that doesn't satisfy 2NF
+SQL> CREATE TABLE Orders (
+  2      OrderID INT,
+  3      CustomerName VARCHAR2(20),
+  4      Product VARCHAR2(20),
+  5      Quantity INT
+  6  );
+
+Table created.
+
+SQL>
+SQL> -- Insert data that doesn't satisfy 2NF
+SQL> INSERT INTO Orders VALUES (1, 'Alex', 'Apple', 10);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (1, 'Alex', 'Banana', 15);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (2, 'Allson', 'Orange', 20);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (2, 'Allson', 'Mango', 25);
+
+1 row created.
+
+SQL> SELECT * FROM Orders;
+
+   ORDERID CUSTOMERNAME         PRODUCT                QUANTITY
+---------- -------------------- -------------------- ----------
+         1 Alex                 Apple                        10
+         1 Alex                 Banana                       15
+         2 Allson               Orange                       20
+         2 Allson               Mango                        25
+
+SQL>
+SQL> -- Create the Customers table
+SQL> CREATE TABLE Customers AS
+  2  SELECT DISTINCT OrderID, CustomerName
+  3  FROM Orders;
+
+Table created.
+
+SQL>
+SQL> -- Add a primary key to the OrderID column in the Customers table
+SQL> ALTER TABLE Customers
+  2  ADD CONSTRAINT pk_OrderID PRIMARY KEY (OrderID);
+
+Table altered.
+
+SQL> DESC Customers;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDERID                                   NOT NULL NUMBER(38)
+ CUSTOMERNAME                                       VARCHAR2(20)
+
+SQL>
+SQL> -- Create the OrderDetails table
+SQL> CREATE TABLE OrderDetails AS
+  2  SELECT OrderID, Product, Quantity
+  3  FROM Orders;
+
+Table created.
+
+SQL>
+SQL> -- Add a foreign key to the OrderID column in the OrderDetails table
+SQL> ALTER TABLE OrderDetails
+  2  ADD CONSTRAINT fk_OrderID FOREIGN KEY (OrderID)
+  3  REFERENCES Customers(OrderID);
+
+Table altered.
+
+SQL> DESC OrderDetails;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDERID                                            NUMBER(38)
+ PRODUCT                                            VARCHAR2(20)
+ QUANTITY                                           NUMBER(38)
+
+SQL>
+SQL> -- Display the tables
+SQL> SELECT * FROM Customers;
+
+   ORDERID CUSTOMERNAME
+---------- --------------------
+         1 Alex
+         2 Allson
+
+SQL> SELECT * FROM OrderDetails;
+
+   ORDERID PRODUCT                QUANTITY
+---------- -------------------- ----------
+         1 Apple                        10
+         1 Banana                       15
+         2 Orange                       20
+         2 Mango                        25
+
+SQL>
+SQL> -- Drop created tables
+SQL> DROP TABLE Orders;
+
+Table dropped.
+
+SQL> DROP TABLE OrderDetails;
+
+Table dropped.
+
+SQL> DROP TABLE Customers;
+
+Table dropped.
+
+SQL>
