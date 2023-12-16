@@ -1,0 +1,77 @@
+CREATE TABLE Students (
+    StudentID NUMBER PRIMARY KEY,
+    FirstName VARCHAR2(15),
+    LastName VARCHAR2(15),
+    Age NUMBER,
+    CONSTRAINT chk_age CHECK (Age >= 18)
+);
+
+INSERT INTO Students VALUES (1, 'Daniel', 'Raja', 20);
+INSERT INTO Students VALUES (2, 'Siva', 'Kumar', 22);
+INSERT INTO Students VALUES (3, 'Muthu', 'Vivek', 19);
+
+SELECT * FROM Students;
+
+CREATE TABLE Courses (
+    CourseID NUMBER PRIMARY KEY,
+    CourseName VARCHAR2(30),
+    CreditHours NUMBER,
+    CONSTRAINT chk_credit CHECK (CreditHours > 0) -- Constraint for positive credit hours
+);
+
+INSERT INTO Courses VALUES (101, 'Mathematics', 3);
+INSERT INTO Courses VALUES (102, 'Computer Science', 4);
+INSERT INTO Courses VALUES (103, 'History', 3);
+
+SELECT * FROM Courses;
+
+CREATE TABLE Enrollments (
+    StudentID NUMBER,
+    CourseID NUMBER,
+    CONSTRAINT fk_student FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+    CONSTRAINT fk_course FOREIGN KEY (CourseID) REFERENCES Courses(CourseID),
+    PRIMARY KEY (StudentID, CourseID)
+);
+
+INSERT INTO Enrollments VALUES (1, 101);
+INSERT INTO Enrollments VALUES (2, 102);
+INSERT INTO Enrollments VALUES (3, 103);
+
+SELECT * FROM Enrollments;
+
+CREATE OR REPLACE TRIGGER trg_check_enrollment
+BEFORE INSERT ON Enrollments
+FOR EACH ROW
+DECLARE
+    studentAge NUMBER;
+BEGIN
+    -- Retrieve student age
+    SELECT Age INTO studentAge FROM Students WHERE StudentID = :NEW.StudentID;
+
+    -- Check if the student is at least 18 years old
+    IF studentAge < 18 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Student must be at least 18 years old');
+    END IF;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE GetStudentsByCourse(courseId NUMBER)
+AS
+BEGIN
+    FOR student_rec IN (SELECT s.* FROM Students s
+                        JOIN Enrollments e ON s.StudentID = e.StudentID
+                        WHERE e.CourseID = courseId)
+    LOOP
+        DBMS_OUTPUT.PUT_LINE('StudentID: ' || student_rec.StudentID || ', FirstName: ' || student_rec.FirstName || ', LastName: ' || student_rec.LastName || ', Age: ' || student_rec.Age);
+    END LOOP;
+END;
+/
+
+EXEC GetStudentsByCourse(101);
+
+-- Don't do this, unless you want to !!!
+DROP PROCEDURE GetStudentsByCourse;
+DROP TRIGGER trg_check_enrollment;
+DROP TABLE Enrollments;
+DROP TABLE Students;
+DROP TABLE Courses;

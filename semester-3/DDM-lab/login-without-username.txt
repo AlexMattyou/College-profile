@@ -1,0 +1,3 @@
+set ORACLE_SID=XE
+sqlplus /nolog
+connect / as SYSDBA

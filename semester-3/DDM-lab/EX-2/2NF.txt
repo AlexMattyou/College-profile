@@ -1,0 +1,37 @@
+CREATE TABLE Orders (
+    OrderID INT,
+    CustomerName VARCHAR2(20),
+    Product VARCHAR2(20),
+    Quantity INT
+);
+
+INSERT INTO Orders VALUES (1, 'Alex', 'Apple', 10);
+INSERT INTO Orders VALUES (1, 'Alex', 'Banana', 15);
+INSERT INTO Orders VALUES (2, 'Allson', 'Orange', 20);
+INSERT INTO Orders VALUES (2, 'Allson', 'Mango', 25);
+SELECT * FROM Orders;
+
+CREATE TABLE Customers AS
+SELECT DISTINCT OrderID, CustomerName
+FROM Orders;
+
+ALTER TABLE Customers
+ADD CONSTRAINT pk_OrderID PRIMARY KEY (OrderID);
+DESC Customers;
+
+CREATE TABLE OrderDetails AS
+SELECT OrderID, Product, Quantity
+FROM Orders;
+
+ALTER TABLE OrderDetails
+ADD CONSTRAINT fk_OrderID FOREIGN KEY (OrderID)
+REFERENCES Customers(OrderID);
+DESC OrderDetails;
+
+SELECT * FROM Customers;
+SELECT * FROM OrderDetails;
+
+-- Don't do this, unless you want to !!!
+DROP TABLE Orders;
+DROP TABLE OrderDetails;
+DROP TABLE Customers;

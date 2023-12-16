@@ -1,0 +1,164 @@
+SQL> -- Create a table that doesn't satisfy 3NF
+SQL> CREATE TABLE Orders (
+  2      OrderID INT,
+  3      CustomerName VARCHAR2(20),
+  4      Product VARCHAR2(20),
+  5      Quantity INT,
+  6      ProductPrice DECIMAL(5,2)
+  7  );
+
+Table created.
+
+SQL> DESC Orders;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDERID                                            NUMBER(38)
+ CUSTOMERNAME                                       VARCHAR2(20)
+ PRODUCT                                            VARCHAR2(20)
+ QUANTITY                                           NUMBER(38)
+ PRODUCTPRICE                                       NUMBER(5,2)
+
+SQL>
+SQL> -- Insert data that doesn't satisfy 3NF
+SQL> INSERT INTO Orders VALUES (1, 'Alex', 'Apple', 10, 0.5);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (2, 'Alex', 'Banana', 15, 0.3);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (3, 'Allson', 'Orange', 20, 0.7);
+
+1 row created.
+
+SQL> INSERT INTO Orders VALUES (4, 'Allson', 'Mango', 25, 1.0);
+
+1 row created.
+
+SQL> SELECT * FROM Orders;
+
+   ORDERID CUSTOMERNAME         PRODUCT                QUANTITY PRODUCTPRICE
+---------- -------------------- -------------------- ---------- ------------
+         1 Alex                 Apple                        10           .5
+         2 Alex                 Banana                       15           .3
+         3 Allson               Orange                       20           .7
+         4 Allson               Mango                        25            1
+
+SQL>
+SQL> -- Transform the table and its data into 3NF
+SQL> CREATE TABLE Customers AS
+  2  SELECT DISTINCT OrderID, CustomerName
+  3  FROM Orders;
+
+Table created.
+
+SQL>
+SQL> CREATE TABLE OrderDetails AS
+  2  SELECT OrderID, Product, Quantity
+  3  FROM Orders;
+
+Table created.
+
+SQL>
+SQL> CREATE TABLE Products AS
+  2  SELECT DISTINCT Product, ProductPrice
+  3  FROM Orders;
+
+Table created.
+
+SQL>
+SQL> -- Add primary keys and foreign keys
+SQL> ALTER TABLE Customers
+  2  ADD CONSTRAINT pk_OrderID PRIMARY KEY (OrderID);
+
+Table altered.
+
+SQL>
+SQL> ALTER TABLE OrderDetails
+  2  ADD CONSTRAINT fk_OrderID FOREIGN KEY (OrderID)
+  3  REFERENCES Customers(OrderID);
+
+Table altered.
+
+SQL>
+SQL> ALTER TABLE Products
+  2  ADD CONSTRAINT pk_Product PRIMARY KEY (Product);
+
+Table altered.
+
+SQL>
+SQL> ALTER TABLE OrderDetails
+  2  ADD CONSTRAINT fk_Product FOREIGN KEY (Product)
+  3  REFERENCES Products(Product);
+
+Table altered.
+
+SQL>
+SQL> DESC Customers;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDERID                                   NOT NULL NUMBER(38)
+ CUSTOMERNAME                                       VARCHAR2(20)
+
+SQL> DESC OrderDetails;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ORDERID                                            NUMBER(38)
+ PRODUCT                                            VARCHAR2(20)
+ QUANTITY                                           NUMBER(38)
+
+SQL> DESC Products;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCT                                   NOT NULL VARCHAR2(20)
+ PRODUCTPRICE                                       NUMBER(5,2)
+
+SQL>
+SQL> -- Display the tables (they should be in 3NF now)
+SQL> SELECT * FROM Customers;
+
+   ORDERID CUSTOMERNAME
+---------- --------------------
+         1 Alex
+         2 Alex
+         3 Allson
+         4 Allson
+
+SQL> SELECT * FROM OrderDetails;
+
+   ORDERID PRODUCT                QUANTITY
+---------- -------------------- ----------
+         1 Apple                        10
+         2 Banana                       15
+         3 Orange                       20
+         4 Mango                        25
+
+SQL> SELECT * FROM Products;
+
+PRODUCT              PRODUCTPRICE
+-------------------- ------------
+Apple                          .5
+Banana                         .3
+Orange                         .7
+Mango                           1
+
+SQL>
+SQL> -- Drop created tables
+SQL> DROP TABLE Orders;
+
+Table dropped.
+
+SQL> DROP TABLE OrderDetails;
+
+Table dropped.
+
+SQL> DROP TABLE Customers;
+
+Table dropped.
+
+SQL> DROP TABLE Products;
+
+Table dropped.
+
+SQL>

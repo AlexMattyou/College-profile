@@ -1,0 +1,160 @@
+SQL> CREATE TABLE Students (
+  2      StudentID NUMBER PRIMARY KEY,
+  3      FirstName VARCHAR2(15),
+  4      LastName VARCHAR2(15),
+  5      Age NUMBER,
+  6      CONSTRAINT chk_age CHECK (Age >= 18)
+  7  );
+
+Table created.
+
+SQL>
+SQL> INSERT INTO Students VALUES (1, 'Daniel', 'Raja', 20);
+
+1 row created.
+
+SQL> INSERT INTO Students VALUES (2, 'Siva', 'Kumar', 22);
+
+1 row created.
+
+SQL> INSERT INTO Students VALUES (3, 'Muthu', 'Vivek', 19);
+
+1 row created.
+
+SQL>
+SQL> SELECT * FROM Students;
+
+ STUDENTID FIRSTNAME       LASTNAME               AGE
+---------- --------------- --------------- ----------
+         1 Daniel          Raja                    20
+         2 Siva            Kumar                   22
+         3 Muthu           Vivek                   19
+
+SQL>
+SQL> CREATE TABLE Courses (
+  2      CourseID NUMBER PRIMARY KEY,
+  3      CourseName VARCHAR2(30),
+  4      CreditHours NUMBER,
+  5      CONSTRAINT chk_credit CHECK (CreditHours > 0) -- Constraint for positive credit hours
+  6  );
+
+Table created.
+
+SQL>
+SQL> INSERT INTO Courses VALUES (101, 'Mathematics', 3);
+
+1 row created.
+
+SQL> INSERT INTO Courses VALUES (102, 'Computer Science', 4);
+
+1 row created.
+
+SQL> INSERT INTO Courses VALUES (103, 'History', 3);
+
+1 row created.
+
+SQL>
+SQL> SELECT * FROM Courses;
+
+  COURSEID COURSENAME                     CREDITHOURS
+---------- ------------------------------ -----------
+       101 Mathematics                              3
+       102 Computer Science                         4
+       103 History                                  3
+
+SQL>
+SQL> CREATE TABLE Enrollments (
+  2      StudentID NUMBER,
+  3      CourseID NUMBER,
+  4      CONSTRAINT fk_student FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
+  5      CONSTRAINT fk_course FOREIGN KEY (CourseID) REFERENCES Courses(CourseID),
+  6      PRIMARY KEY (StudentID, CourseID)
+  7  );
+
+Table created.
+
+SQL>
+SQL> INSERT INTO Enrollments VALUES (1, 101);
+
+1 row created.
+
+SQL> INSERT INTO Enrollments VALUES (2, 102);
+
+1 row created.
+
+SQL> INSERT INTO Enrollments VALUES (3, 103);
+
+1 row created.
+
+SQL>
+SQL> SELECT * FROM Enrollments;
+
+ STUDENTID   COURSEID
+---------- ----------
+         1        101
+         2        102
+         3        103
+
+SQL>
+SQL> CREATE OR REPLACE TRIGGER trg_check_enrollment
+  2  BEFORE INSERT ON Enrollments
+  3  FOR EACH ROW
+  4  DECLARE
+  5      studentAge NUMBER;
+  6  BEGIN
+  7      -- Retrieve student age
+  8      SELECT Age INTO studentAge FROM Students WHERE StudentID = :NEW.StudentID;
+  9
+ 10      -- Check if the student is at least 18 years old
+ 11      IF studentAge < 18 THEN
+ 12          RAISE_APPLICATION_ERROR(-20001, 'Student must be at least 18 years old');
+ 13      END IF;
+ 14  END;
+ 15  /
+
+Trigger created.
+
+SQL>
+SQL> CREATE OR REPLACE PROCEDURE GetStudentsByCourse(courseId NUMBER)
+  2  AS
+  3  BEGIN
+  4      FOR student_rec IN (SELECT s.* FROM Students s
+  5                          JOIN Enrollments e ON s.StudentID = e.StudentID
+  6                          WHERE e.CourseID = courseId)
+  7      LOOP
+  8          DBMS_OUTPUT.PUT_LINE('StudentID: ' || student_rec.StudentID || ', FirstName: ' || student_rec.FirstName || ', LastName: ' || student_rec.LastName || ', Age: ' || student_rec.Age);
+  9      END LOOP;
+ 10  END;
+ 11  /
+
+Procedure created.
+
+SQL>
+SQL> EXEC GetStudentsByCourse(101);
+StudentID: 1, FirstName: Daniel, LastName: Raja, Age: 20
+StudentID: 2, FirstName: Siva, LastName: Kumar, Age: 22
+StudentID: 3, FirstName: Muthu, LastName: Vivek, Age: 19
+
+PL/SQL procedure successfully completed.
+
+SQL>
+SQL> -- Don't do this, unless you want to !!!
+SQL> DROP PROCEDURE GetStudentsByCourse;
+
+Procedure dropped.
+
+SQL> DROP TRIGGER trg_check_enrollment;
+
+Trigger dropped.
+
+SQL> DROP TABLE Enrollments;
+
+Table dropped.
+
+SQL> DROP TABLE Students;
+
+Table dropped.
+
+SQL> DROP TABLE Courses;
+
+Table dropped.

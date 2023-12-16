@@ -1,0 +1,80 @@
+CREATE TABLE Patients (
+    PatientID INT PRIMARY KEY,
+    PatientName VARCHAR(15),
+    AdmissionDate DATE
+);
+
+CREATE TABLE Doctors (
+    DoctorID INT PRIMARY KEY,
+    DoctorName VARCHAR(15)
+);
+
+CREATE TABLE Medications (
+    MedicationID INT PRIMARY KEY,
+    MedicationName VARCHAR(10)
+);
+
+CREATE TABLE Consultations (
+    PatientID INT,
+    DoctorID INT,
+    ConsultationDate DATE,
+    PRIMARY KEY (PatientID, DoctorID),
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+    FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
+);
+
+CREATE TABLE MedicationAssignments (
+    PatientID INT,
+    MedicationID INT,
+    MedicationStartDate DATE,
+    MedicationEndDate DATE,
+    PRIMARY KEY (PatientID, MedicationID),
+    FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+    FOREIGN KEY (MedicationID) REFERENCES Medications(MedicationID)
+);
+
+INSERT INTO Patients VALUES (1, 'John', TO_DATE('2023-01-01', 'YYYY-MM-DD'));
+INSERT INTO Patients VALUES (2, 'Sue', TO_DATE('2023-02-15', 'YYYY-MM-DD'));
+
+INSERT INTO Doctors VALUES (101, 'Dr. Johnson');
+INSERT INTO Doctors VALUES (102, 'Dr. Anderson');
+
+INSERT INTO Medications VALUES (1001, 'Med-A');
+INSERT INTO Medications VALUES (1002, 'Med-B');
+
+INSERT INTO Consultations VALUES (1, 101, TO_DATE('2023-01-05', 'YYYY-MM-DD'));
+INSERT INTO Consultations VALUES (2, 102, TO_DATE('2023-02-20', 'YYYY-MM-DD'));
+
+INSERT INTO MedicationAssignments VALUES (1, 1001, TO_DATE('2023-01-02', 'YYYY-MM-DD'), TO_DATE('2023-01-10', 'YYYY-MM-DD'));
+INSERT INTO MedicationAssignments VALUES (2, 1002, TO_DATE('2023-02-18', 'YYYY-MM-DD'), TO_DATE('2023-02-25', 'YYYY-MM-DD'));
+
+
+CREATE VIEW HospitalView AS
+SELECT
+    P.PatientID,
+    P.PatientName,
+    P.AdmissionDate,
+    D.DoctorID,
+    D.DoctorName,
+    C.ConsultationDate,
+    M.MedicationID,
+    M.MedicationName,
+    MA.MedicationStartDate,
+    MA.MedicationEndDate
+FROM Patients P
+LEFT JOIN Consultations C ON P.PatientID = C.PatientID
+LEFT JOIN Doctors D ON C.DoctorID = D.DoctorID
+LEFT JOIN MedicationAssignments MA ON P.PatientID = MA.PatientID
+LEFT JOIN Medications M ON MA.MedicationID = M.MedicationID;
+
+COLUMN PatientName FORMAT A20
+SELECT * FROM HospitalView;
+
+-- Don't do this, unless you want to !!!
+DROP VIEW HospitalView;
+DROP TABLE MedicationAssignments;
+DROP TABLE Consultations;
+DROP TABLE Medications;
+DROP TABLE Doctors;
+DROP TABLE Patients;
+

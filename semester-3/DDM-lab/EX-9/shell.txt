@@ -1,0 +1,91 @@
+SQL> CREATE OR REPLACE TYPE AddressType AS OBJECT (
+  2      Street VARCHAR2(15),
+  3      City VARCHAR2(10),
+  4      State VARCHAR2(2),
+  5      MEMBER FUNCTION GetFullAddress RETURN VARCHAR2
+  6  );
+  7  /
+
+Type created.
+
+SQL>
+SQL> CREATE OR REPLACE TYPE BODY AddressType AS
+  2      MEMBER FUNCTION GetFullAddress RETURN VARCHAR2 IS
+  3      BEGIN
+  4          RETURN SELF.Street || ', ' || SELF.City || ', ' || SELF.State;
+  5      END GetFullAddress;
+  6  END;
+  7  /
+
+Type body created.
+
+SQL>
+SQL> CREATE TABLE Employees (
+  2      EmployeeID NUMBER PRIMARY KEY,
+  3      FirstName VARCHAR2(10),
+  4      LastName VARCHAR2(10),
+  5      HomeAddress AddressType
+  6  );
+
+Table created.
+
+SQL>
+SQL> INSERT INTO Employees
+  2  VALUES (1, 'Sarvesh', 'S', AddressType('12 Main St', 'cityA', 'CA'));
+
+1 row created.
+
+SQL> INSERT INTO Employees
+  2  VALUES (2, 'Sam', 'Dav', AddressType('45 Oak St', 'cityB', 'NY'));
+
+1 row created.
+
+SQL> INSERT INTO Employees
+  2  VALUES (3, 'Oshan', 'Abdul', AddressType('78 Pine St', 'cityC', 'TX'));
+
+1 row created.
+
+SQL> INSERT INTO Employees
+  2  VALUES (4, 'Harish', 'Babu', AddressType('10 Cedar St', 'cityD', 'FL'));
+
+1 row created.
+
+SQL>
+SQL> COMMIT;
+
+Commit complete.
+
+SQL>
+SQL> COLUMN homeaddress FORMAT A42
+SQL> SELECT * FROM Employees;
+
+EMPLOYEEID FIRSTNAME  LASTNAME   HOMEADDRESS(STREET, CITY, STATE)
+---------- ---------- ---------- ------------------------------------------
+         1 Sarvesh    S          ADDRESSTYPE('12 Main St', 'cityA', 'CA')
+         2 Sam        Dav        ADDRESSTYPE('45 Oak St', 'cityB', 'NY')
+         3 Oshan      Abdul      ADDRESSTYPE('78 Pine St', 'cityC', 'TX')
+         4 Harish     Babu       ADDRESSTYPE('10 Cedar St', 'cityD', 'FL')
+
+SQL>
+SQL> COLUMN FullAddress FORMAT A42
+SQL> SELECT EmployeeID, FirstName, LastName,
+  2  TREAT(HomeAddress AS AddressType).GetFullAddress() AS FullAddress
+  3  FROM Employees;
+
+EMPLOYEEID FIRSTNAME  LASTNAME   FULLADDRESS
+---------- ---------- ---------- ------------------------------------------
+         1 Sarvesh    S          12 Main St, cityA, CA
+         2 Sam        Dav        45 Oak St, cityB, NY
+         3 Oshan      Abdul      78 Pine St, cityC, TX
+         4 Harish     Babu       10 Cedar St, cityD, FL
+
+SQL> ----------------------------------------------------------
+SQL>
+SQL> -- Don't do this, unless you want to !!!
+SQL> DROP TABLE Employees;
+
+Table dropped.
+
+SQL> DROP TYPE AddressType FORCE;
+
+Type dropped.

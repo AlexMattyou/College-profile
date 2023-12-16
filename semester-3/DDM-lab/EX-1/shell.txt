@@ -1,0 +1,104 @@
+SQL> CREATE TABLE Student (
+  2      ID NUMBER PRIMARY KEY,
+  3      Name VARCHAR2(15) NOT NULL
+  4  );
+
+Table created.
+
+SQL>
+SQL> CREATE TABLE Course (
+  2      CourseID NUMBER PRIMARY KEY,
+  3      Title VARCHAR2(20) NOT NULL
+  4  );
+
+Table created.
+
+SQL>
+SQL> CREATE TABLE Enrolls (
+  2      Grade VARCHAR2(2),
+  3      StudentID NUMBER,
+  4      CourseID NUMBER,
+  5      PRIMARY KEY (StudentID, CourseID),
+  6      FOREIGN KEY (StudentID) REFERENCES Student(ID),
+  7      FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
+  8  );
+
+Table created.
+
+SQL>
+SQL> INSERT INTO Student VALUES (1, 'Daniel');
+
+1 row created.
+
+SQL> INSERT INTO Student VALUES (2, 'Jetson');
+
+1 row created.
+
+SQL> INSERT INTO Student VALUES (3, 'Siva');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Course VALUES (101, 'Python');
+
+1 row created.
+
+SQL> INSERT INTO Course VALUES (102, 'R');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Enrolls VALUES ('A', 1, 101);
+
+1 row created.
+
+SQL> INSERT INTO Enrolls VALUES ('A+', 2, 101);
+
+1 row created.
+
+SQL> INSERT INTO Enrolls VALUES ('B+', 1, 102);
+
+1 row created.
+
+SQL> INSERT INTO Enrolls VALUES ('A', 3, 101);
+
+1 row created.
+
+SQL> INSERT INTO Enrolls VALUES ('A+', 2, 102);
+
+1 row created.
+
+SQL> INSERT INTO Enrolls VALUES ('B+', 3, 102);
+
+1 row created.
+
+SQL>
+SQL> SELECT s.ID AS StudentID, s.Name AS StudentName, c.Title AS CourseTitle, e.Grade
+  2  FROM Student s
+  3  JOIN Enrolls e ON s.ID = e.StudentID
+  4  JOIN Course c ON e.CourseID = c.CourseID;
+
+ STUDENTID STUDENTNAME     COURSETITLE          GR
+---------- --------------- -------------------- --
+         1 Daniel          Python               A
+         2 Jetson          Python               A+
+         1 Daniel          R                    B+
+         3 Siva            Python               A
+         2 Jetson          R                    A+
+         3 Siva            R                    B+
+
+6 rows selected.
+
+SQL>
+SQL> -- Drop the tables
+SQL> DROP TABLE Enrolls;
+
+Table dropped.
+
+SQL> DROP TABLE Course;
+
+Table dropped.
+
+SQL> DROP TABLE Student;
+
+Table dropped.

@@ -1,0 +1,54 @@
+CREATE TABLE Orders (
+    OrderID INT,
+    CustomerName VARCHAR2(20),
+    Product VARCHAR2(20),
+    Quantity INT,
+    ProductPrice DECIMAL(5,2)
+);
+DESC Orders;
+
+INSERT INTO Orders VALUES (1, 'Alex', 'Apple', 10, 0.5);
+INSERT INTO Orders VALUES (2, 'Alex', 'Banana', 15, 0.3);
+INSERT INTO Orders VALUES (3, 'Allson', 'Orange', 20, 0.7);
+INSERT INTO Orders VALUES (4, 'Allson', 'Mango', 25, 1.0);
+SELECT * FROM Orders;
+
+CREATE TABLE Customers AS
+SELECT DISTINCT OrderID, CustomerName
+FROM Orders;
+
+CREATE TABLE OrderDetails AS
+SELECT OrderID, Product, Quantity
+FROM Orders;
+
+CREATE TABLE Products AS
+SELECT DISTINCT Product, ProductPrice
+FROM Orders;
+
+ALTER TABLE Customers
+ADD CONSTRAINT pk_OrderID PRIMARY KEY (OrderID);
+
+ALTER TABLE OrderDetails
+ADD CONSTRAINT fk_OrderID FOREIGN KEY (OrderID)
+REFERENCES Customers(OrderID);
+
+ALTER TABLE Products
+ADD CONSTRAINT pk_Product PRIMARY KEY (Product);
+
+ALTER TABLE OrderDetails
+ADD CONSTRAINT fk_Product FOREIGN KEY (Product)
+REFERENCES Products(Product);
+
+DESC Customers;
+DESC OrderDetails;
+DESC Products;
+
+SELECT * FROM Customers;
+SELECT * FROM OrderDetails;
+SELECT * FROM Products;
+
+-- Don't do this, unless you want to !!!
+DROP TABLE Orders;
+DROP TABLE OrderDetails;
+DROP TABLE Customers;
+DROP TABLE Products;

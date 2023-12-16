@@ -1,0 +1,156 @@
+SQL> CREATE TABLE Patients (
+  2      PatientID INT PRIMARY KEY,
+  3      PatientName VARCHAR(15),
+  4      AdmissionDate DATE
+  5  );
+
+Table created.
+
+SQL>
+SQL> CREATE TABLE Doctors (
+  2      DoctorID INT PRIMARY KEY,
+  3      DoctorName VARCHAR(15)
+  4  );
+
+Table created.
+
+SQL>
+SQL> CREATE TABLE Medications (
+  2      MedicationID INT PRIMARY KEY,
+  3      MedicationName VARCHAR(10)
+  4  );
+
+Table created.
+
+SQL>
+SQL> CREATE TABLE Consultations (
+  2      PatientID INT,
+  3      DoctorID INT,
+  4      ConsultationDate DATE,
+  5      PRIMARY KEY (PatientID, DoctorID),
+  6      FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+  7      FOREIGN KEY (DoctorID) REFERENCES Doctors(DoctorID)
+  8  );
+
+Table created.
+
+SQL>
+SQL> CREATE TABLE MedicationAssignments (
+  2      PatientID INT,
+  3      MedicationID INT,
+  4      MedicationStartDate DATE,
+  5      MedicationEndDate DATE,
+  6      PRIMARY KEY (PatientID, MedicationID),
+  7      FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+  8      FOREIGN KEY (MedicationID) REFERENCES Medications(MedicationID)
+  9  );
+
+Table created.
+
+SQL>
+SQL> INSERT INTO Patients VALUES (1, 'John', TO_DATE('2023-01-01', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO Patients VALUES (2, 'Sue', TO_DATE('2023-02-15', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Doctors VALUES (101, 'Dr. Johnson');
+
+1 row created.
+
+SQL> INSERT INTO Doctors VALUES (102, 'Dr. Anderson');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Medications VALUES (1001, 'Med-A');
+
+1 row created.
+
+SQL> INSERT INTO Medications VALUES (1002, 'Med-B');
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO Consultations VALUES (1, 101, TO_DATE('2023-01-05', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO Consultations VALUES (2, 102, TO_DATE('2023-02-20', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL> INSERT INTO MedicationAssignments VALUES (1, 1001, TO_DATE('2023-01-02', 'YYYY-MM-DD'), TO_DATE('2023-01-10', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO MedicationAssignments VALUES (2, 1002, TO_DATE('2023-02-18', 'YYYY-MM-DD'), TO_DATE('2023-02-25', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL>
+SQL>
+SQL> CREATE VIEW HospitalView AS
+  2  SELECT
+  3      P.PatientID,
+  4      P.PatientName,
+  5      P.AdmissionDate,
+  6      D.DoctorID,
+  7      D.DoctorName,
+  8      C.ConsultationDate,
+  9      M.MedicationID,
+ 10      M.MedicationName,
+ 11      MA.MedicationStartDate,
+ 12      MA.MedicationEndDate
+ 13  FROM Patients P
+ 14  LEFT JOIN Consultations C ON P.PatientID = C.PatientID
+ 15  LEFT JOIN Doctors D ON C.DoctorID = D.DoctorID
+ 16  LEFT JOIN MedicationAssignments MA ON P.PatientID = MA.PatientID
+ 17  LEFT JOIN Medications M ON MA.MedicationID = M.MedicationID;
+
+View created.
+
+SQL>
+SQL> COLUMN PatientName FORMAT A20
+SQL> SELECT * FROM HospitalView;
+
+ PATIENTID PATIENTNAME          ADMISSION   DOCTORID DOCTORNAME      CONSULTAT
+---------- -------------------- --------- ---------- --------------- ---------
+MEDICATIONID MEDICATION MEDICATIO MEDICATIO
+------------ ---------- --------- ---------
+         1 John                 01-JAN-23        101 Dr. Johnson     05-JAN-23
+        1001 Med-A      02-JAN-23 10-JAN-23
+
+         2 Sue                  15-FEB-23        102 Dr. Anderson    20-FEB-23
+        1002 Med-B      18-FEB-23 25-FEB-23
+
+
+SQL>
+SQL> -- Don't do this, unless you want to !!!
+SQL> DROP VIEW HospitalView;
+
+View dropped.
+
+SQL> DROP TABLE MedicationAssignments;
+
+Table dropped.
+
+SQL> DROP TABLE Consultations;
+
+Table dropped.
+
+SQL> DROP TABLE Medications;
+
+Table dropped.
+
+SQL> DROP TABLE Doctors;
+
+Table dropped.
+
+SQL> DROP TABLE Patients;
+
+Table dropped.

@@ -1,0 +1,43 @@
+CREATE TABLE Student (
+    ID NUMBER PRIMARY KEY,
+    Name VARCHAR2(15) NOT NULL
+);
+
+CREATE TABLE Course (
+    CourseID NUMBER PRIMARY KEY,
+    Title VARCHAR2(20) NOT NULL
+);
+
+CREATE TABLE Enrolls (
+    Grade VARCHAR2(2),
+    StudentID NUMBER,
+    CourseID NUMBER,
+    PRIMARY KEY (StudentID, CourseID),
+    FOREIGN KEY (StudentID) REFERENCES Student(ID),
+    FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
+);
+
+INSERT INTO Student VALUES (1, 'Daniel');
+INSERT INTO Student VALUES (2, 'Jetson');
+INSERT INTO Student VALUES (3, 'Siva');
+
+INSERT INTO Course VALUES (101, 'Python');
+INSERT INTO Course VALUES (102, 'R');
+
+INSERT INTO Enrolls VALUES ('A', 1, 101);
+INSERT INTO Enrolls VALUES ('A+', 2, 101);
+INSERT INTO Enrolls VALUES ('B+', 1, 102);
+INSERT INTO Enrolls VALUES ('A', 3, 101);
+INSERT INTO Enrolls VALUES ('A+', 2, 102);
+INSERT INTO Enrolls VALUES ('B+', 3, 102);
+
+SELECT s.ID AS StudentID, s.Name AS StudentName, c.Title AS CourseTitle, e.Grade
+FROM Student s
+JOIN Enrolls e ON s.ID = e.StudentID
+JOIN Course c ON e.CourseID = c.CourseID;
+
+-- Don't do this, unless you want to !!!
+DROP TABLE Enrolls;
+DROP TABLE Course;
+DROP TABLE Student;
+
