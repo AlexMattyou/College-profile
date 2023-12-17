@@ -1,11 +1,11 @@
-SQL> -- Create a table that doesn't satisfy 3NF
 SQL> CREATE TABLE Orders (
   2      OrderID INT,
   3      CustomerName VARCHAR2(20),
   4      Product VARCHAR2(20),
   5      Quantity INT,
-  6      ProductPrice DECIMAL(5,2)
-  7  );
+  6      ProductPrice DECIMAL(5,2),
+  7      Supplier VARCHAR2(20)
+  8  );
 
 Table created.
 
@@ -17,36 +17,26 @@ SQL> DESC Orders;
  PRODUCT                                            VARCHAR2(20)
  QUANTITY                                           NUMBER(38)
  PRODUCTPRICE                                       NUMBER(5,2)
+ SUPPLIER                                           VARCHAR2(20)
 
 SQL>
-SQL> -- Insert data that doesn't satisfy 3NF
-SQL> INSERT INTO Orders VALUES (1, 'Alex', 'Apple', 10, 0.5);
+SQL> INSERT INTO Orders VALUES (1, 'Alex', 'Apple', 10, 0.5, 'Supplier1');
 
 1 row created.
 
-SQL> INSERT INTO Orders VALUES (2, 'Alex', 'Banana', 15, 0.3);
+SQL> INSERT INTO Orders VALUES (2, 'Alex', 'Banana', 15, 0.3, 'Supplier2');
 
 1 row created.
 
-SQL> INSERT INTO Orders VALUES (3, 'Allson', 'Orange', 20, 0.7);
+SQL> INSERT INTO Orders VALUES (3, 'Allson', 'Orange', 20, 0.7, 'Supplier3');
 
 1 row created.
 
-SQL> INSERT INTO Orders VALUES (4, 'Allson', 'Mango', 25, 1.0);
+SQL> INSERT INTO Orders VALUES (4, 'Allson', 'Mango', 25, 1.0, 'Supplier4');
 
 1 row created.
-
-SQL> SELECT * FROM Orders;
-
-   ORDERID CUSTOMERNAME         PRODUCT                QUANTITY PRODUCTPRICE
----------- -------------------- -------------------- ---------- ------------
-         1 Alex                 Apple                        10           .5
-         2 Alex                 Banana                       15           .3
-         3 Allson               Orange                       20           .7
-         4 Allson               Mango                        25            1
 
 SQL>
-SQL> -- Transform the table and its data into 3NF
 SQL> CREATE TABLE Customers AS
   2  SELECT DISTINCT OrderID, CustomerName
   3  FROM Orders;
@@ -62,13 +52,12 @@ Table created.
 
 SQL>
 SQL> CREATE TABLE Products AS
-  2  SELECT DISTINCT Product, ProductPrice
+  2  SELECT DISTINCT Product, ProductPrice, Supplier
   3  FROM Orders;
 
 Table created.
 
 SQL>
-SQL> -- Add primary keys and foreign keys
 SQL> ALTER TABLE Customers
   2  ADD CONSTRAINT pk_OrderID PRIMARY KEY (OrderID);
 
@@ -113,9 +102,9 @@ SQL> DESC Products;
  ----------------------------------------- -------- ----------------------------
  PRODUCT                                   NOT NULL VARCHAR2(20)
  PRODUCTPRICE                                       NUMBER(5,2)
+ SUPPLIER                                           VARCHAR2(20)
 
 SQL>
-SQL> -- Display the tables (they should be in 3NF now)
 SQL> SELECT * FROM Customers;
 
    ORDERID CUSTOMERNAME
@@ -136,29 +125,9 @@ SQL> SELECT * FROM OrderDetails;
 
 SQL> SELECT * FROM Products;
 
-PRODUCT              PRODUCTPRICE
--------------------- ------------
-Apple                          .5
-Banana                         .3
-Orange                         .7
-Mango                           1
-
-SQL>
-SQL> -- Drop created tables
-SQL> DROP TABLE Orders;
-
-Table dropped.
-
-SQL> DROP TABLE OrderDetails;
-
-Table dropped.
-
-SQL> DROP TABLE Customers;
-
-Table dropped.
-
-SQL> DROP TABLE Products;
-
-Table dropped.
-
-SQL>
+PRODUCT              PRODUCTPRICE SUPPLIER
+-------------------- ------------ --------------------
+Apple                          .5 Supplier1
+Banana                         .3 Supplier2
+Orange                         .7 Supplier3
+Mango                           1 Supplier4

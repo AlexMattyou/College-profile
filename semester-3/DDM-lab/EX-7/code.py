@@ -1,6 +1,6 @@
 import tkinter as tk
 import cx_Oracle as db
-connection = db.connect(user="system",password="nsnOdbiCan77#",dsn="XE")
+connection = db.connect(user="system",password="grace",dsn="XE")
 
 root = tk.Tk()
 root.geometry("300x200")

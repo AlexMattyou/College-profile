@@ -88,17 +88,3 @@ SQL> SELECT s.ID AS StudentID, s.Name AS StudentName, c.Title AS CourseTitle, e.
          3 Siva            R                    B+
 
 6 rows selected.
-
-SQL>
-SQL> -- Drop the tables
-SQL> DROP TABLE Enrolls;
-
-Table dropped.
-
-SQL> DROP TABLE Course;
-
-Table dropped.
-
-SQL> DROP TABLE Student;
-
-Table dropped.

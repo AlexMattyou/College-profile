@@ -1,4 +1,3 @@
-SQL> -- Create a table that doesn't satisfy 2NF
 SQL> CREATE TABLE Orders (
   2      OrderID INT,
   3      CustomerName VARCHAR2(20),
@@ -9,7 +8,6 @@ SQL> CREATE TABLE Orders (
 Table created.
 
 SQL>
-SQL> -- Insert data that doesn't satisfy 2NF
 SQL> INSERT INTO Orders VALUES (1, 'Alex', 'Apple', 10);
 
 1 row created.
@@ -36,7 +34,6 @@ SQL> SELECT * FROM Orders;
          2 Allson               Mango                        25
 
 SQL>
-SQL> -- Create the Customers table
 SQL> CREATE TABLE Customers AS
   2  SELECT DISTINCT OrderID, CustomerName
   3  FROM Orders;
@@ -44,7 +41,6 @@ SQL> CREATE TABLE Customers AS
 Table created.
 
 SQL>
-SQL> -- Add a primary key to the OrderID column in the Customers table
 SQL> ALTER TABLE Customers
   2  ADD CONSTRAINT pk_OrderID PRIMARY KEY (OrderID);
 
@@ -57,7 +53,6 @@ SQL> DESC Customers;
  CUSTOMERNAME                                       VARCHAR2(20)
 
 SQL>
-SQL> -- Create the OrderDetails table
 SQL> CREATE TABLE OrderDetails AS
   2  SELECT OrderID, Product, Quantity
   3  FROM Orders;
@@ -65,7 +60,6 @@ SQL> CREATE TABLE OrderDetails AS
 Table created.
 
 SQL>
-SQL> -- Add a foreign key to the OrderID column in the OrderDetails table
 SQL> ALTER TABLE OrderDetails
   2  ADD CONSTRAINT fk_OrderID FOREIGN KEY (OrderID)
   3  REFERENCES Customers(OrderID);
@@ -80,7 +74,6 @@ SQL> DESC OrderDetails;
  QUANTITY                                           NUMBER(38)
 
 SQL>
-SQL> -- Display the tables
 SQL> SELECT * FROM Customers;
 
    ORDERID CUSTOMERNAME
@@ -96,19 +89,3 @@ SQL> SELECT * FROM OrderDetails;
          1 Banana                       15
          2 Orange                       20
          2 Mango                        25
-
-SQL>
-SQL> -- Drop created tables
-SQL> DROP TABLE Orders;
-
-Table dropped.
-
-SQL> DROP TABLE OrderDetails;
-
-Table dropped.
-
-SQL> DROP TABLE Customers;
-
-Table dropped.
-
-SQL>

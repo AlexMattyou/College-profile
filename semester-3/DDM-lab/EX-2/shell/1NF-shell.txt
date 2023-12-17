@@ -1,4 +1,3 @@
-SQL> -- Create a table that doesn't satisfy 1NF
 SQL> CREATE TABLE Orders (
   2      OrderID INT,
   3      CustomerName varchar2(20),
@@ -15,7 +14,6 @@ SQL> DESC Orders;
  PRODUCT                                            VARCHAR2(30)
 
 SQL>
-SQL> -- Insert data that doesn't satisfy 1NF
 SQL> INSERT INTO Orders VALUES (1, 'Alex', 'Apple, Banana');
 
 1 row created.
@@ -37,7 +35,6 @@ SQL> SELECT * FROM Orders;
          3 Oshan                Mango, Grapes
 
 SQL>
-SQL> -- Transform the table and its data into 1NF
 SQL> CREATE TABLE Orders_1NF AS
   2  SELECT OrderID, CustomerName, LTRIM(regexp_substr(Product, '[^,]+', 1, level)) Product
   3  FROM Orders
@@ -55,7 +52,6 @@ SQL> DESC Orders_1NF;
  PRODUCT                                            VARCHAR2(120)
 
 SQL>
-SQL> -- Display the table (it should be in 1NF now)
 SQL> COLUMN Product FORMAT A20
 SQL> SELECT * FROM Orders_1NF;
 
@@ -69,15 +65,3 @@ SQL> SELECT * FROM Orders_1NF;
          3 Oshan                Grapes
 
 6 rows selected.
-
-SQL>
-SQL> -- Drop created tables
-SQL> DROP TABLE Orders;
-
-Table dropped.
-
-SQL> DROP TABLE Orders_1NF;
-
-Table dropped.
-
-SQL>
