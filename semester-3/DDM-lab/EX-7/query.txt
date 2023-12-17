@@ -1,0 +1,15 @@
+-- STEP 1 : create a table [in sql-plus]:
+CREATE TABLE Student (
+    ID NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    Name VARCHAR2(50) NOT NULL,
+    Age NUMBER
+    );
+
+-- STEP 2 : run the code.py [in vs-code]:
+-- STEP 3 : add data and click submit [in vs-code]:
+-- STEP 3 : see the data [in sql-plus]:
+SELECT * FROM Student;
+
+----------------------------------------------------------------
+-- STEP 4: To clear the data [in sql-plus]:
+TRUNCATE TABLE Student;

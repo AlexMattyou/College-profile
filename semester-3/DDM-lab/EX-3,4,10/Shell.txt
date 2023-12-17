@@ -1,5 +1,4 @@
-SQL> -- Exercise 3
-SQL>
+SQL> -- EX-3 [Implement the database using SQL Data definition with constraints, Views]
 SQL> CREATE TABLE Authors (
   2      AuthorID NUMBER,
   3      Name varchar2(20) NOT NULL,
@@ -124,8 +123,10 @@ Chess of Life                  Guru Rohith          Gamma                 2019
 Change Your Story              Roger Samuel         Gamma                 2023
 
 SQL>
-SQL> -- Exercise 4
+SQL> ----------------------------------------------------------
+SQL> -- EX-4 [Query the database using SQL Manipulation]
 SQL>
+SQL> -- Insert:
 SQL> INSERT INTO Authors (AuthorID, Name) VALUES (3, 'Balagan');
 
 1 row created.
@@ -143,8 +144,8 @@ SQL> SELECT * FROM BooksInfo;
 TITLE                          AUTHOR               PUBLISHER  PUBLICATIONYEAR
 ------------------------------ -------------------- ---------- ---------------
 Our Responsibility             Guru Rohith          Alpha                 2017
-School != Education            Roger Samuel         Beta                  2022
 Think Savant                   Roger Samuel         Alpha                 2020
+School != Education            Roger Samuel         Beta                  2022
 Chess of Life                  Guru Rohith          Gamma                 2019
 Change Your Story              Roger Samuel         Gamma                 2023
 Business Mindset               Balagan              Delta
@@ -152,6 +153,7 @@ Business Mindset               Balagan              Delta
 6 rows selected.
 
 SQL>
+SQL> -- Update:
 SQL> UPDATE Books SET Title = 'Entrepreneur Mindset', PublicationYear = 2021 WHERE BookID = 6;
 
 1 row updated.
@@ -165,8 +167,8 @@ SQL> SELECT * FROM BooksInfo;
 TITLE                          AUTHOR               PUBLISHER  PUBLICATIONYEAR
 ------------------------------ -------------------- ---------- ---------------
 Our Responsibility             Guru Rohith          Alpha                 2017
-School != Education            Muthu Vivek          Beta                  2022
 Think Savant                   Muthu Vivek          Alpha                 2020
+School != Education            Muthu Vivek          Beta                  2022
 Chess of Life                  Guru Rohith          Gamma                 2019
 Change Your Story              Muthu Vivek          Gamma                 2023
 Entrepreneur Mindset           Balagan              Delta                 2021
@@ -174,6 +176,7 @@ Entrepreneur Mindset           Balagan              Delta                 2021
 6 rows selected.
 
 SQL>
+SQL> -- Delete:
 SQL> DELETE FROM Books WHERE PublisherID = 3;
 
 2 rows deleted.
@@ -183,39 +186,89 @@ SQL> SELECT * FROM BooksInfo;
 TITLE                          AUTHOR               PUBLISHER  PUBLICATIONYEAR
 ------------------------------ -------------------- ---------- ---------------
 Our Responsibility             Guru Rohith          Alpha                 2017
+Think Savant                   Muthu Vivek          Alpha                 2020
 School != Education            Muthu Vivek          Beta                  2022
-Think Savant                   Muthu Vivek          Alpha                 2020
-Entrepreneur Mindset           Balagan              Delta                 2021
-
-SQL> DELETE FROM Books WHERE (authorID = 2 AND PublicationYear > 2020);
-
-1 row deleted.
-
-SQL> SELECT * FROM BooksInfo;
-
-TITLE                          AUTHOR               PUBLISHER  PUBLICATIONYEAR
------------------------------- -------------------- ---------- ---------------
-Our Responsibility             Guru Rohith          Alpha                 2017
-Think Savant                   Muthu Vivek          Alpha                 2020
 Entrepreneur Mindset           Balagan              Delta                 2021
 
 SQL>
-SQL> -- Don't write
+SQL> ----------------------------------------------------------
+SQL> -- EX-10 [Querying the Object-relational database using Objet Query language]
 SQL>
-SQL> DROP VIEW BooksInfo;
+SQL> -- Queries/Sub-queries
+SQL> SELECT B.Title, A.Name AS Author, P.Name AS Publisher
+  2  FROM Books B
+  3  JOIN Authors A ON B.AuthorID = A.AuthorID
+  4  JOIN Publishers P ON B.PublisherID = P.PublisherID;
 
-View dropped.
-
-SQL> DROP TABLE Books;
-
-Table dropped.
-
-SQL> DROP TABLE Authors;
-
-Table dropped.
-
-SQL> DROP TABLE Publishers;
-
-Table dropped.
+TITLE                          AUTHOR               PUBLISHER
+------------------------------ -------------------- ----------
+Our Responsibility             Guru Rohith          Alpha
+Think Savant                   Muthu Vivek          Alpha
+School != Education            Muthu Vivek          Beta
+Entrepreneur Mindset           Balagan              Delta
 
 SQL>
+SQL> -- Return Types
+SQL> SELECT * FROM Books
+  2  WHERE Title = 'Think Savant';
+
+    BOOKID TITLE                            AUTHORID PUBLISHERID PUBLICATIONYEAR
+---------- ------------------------------ ---------- ----------- ---------------
+         3 Think Savant                            2           1            2020
+
+SQL>
+SQL> -- Quantifiers
+SQL> SELECT CASE WHEN COUNT(*) > 0
+  2  THEN 'Published' ELSE 'Not-Published' END AS Books_2020
+  3  FROM Books
+  4  WHERE PublicationYear = 2020;
+
+BOOKS_2020
+-------------
+Published
+
+SQL> SELECT CASE WHEN COUNT(*) > 0
+  2  THEN 'Published' ELSE 'Not-Published' END AS Books_2018
+  3  FROM Books
+  4  WHERE PublicationYear = 2018;
+
+BOOKS_2018
+-------------
+Not-Published
+
+SQL>
+SQL> -- Aggregation
+SQL> SELECT AVG(PublicationYear) AS AveragePublicationYear
+  2  FROM Books;
+
+AVERAGEPUBLICATIONYEAR
+----------------------
+                  2020
+
+SQL>
+SQL> -- Operators on Set or Bag Objects
+SQL> SELECT BookID, Title, PublicationYear
+  2  FROM Books
+  3  WHERE PublicationYear < 2018
+  4  UNION
+  5  SELECT BookID, Title, PublicationYear
+  6  FROM Books
+  7  WHERE PublicationYear > 2021;
+
+    BOOKID TITLE                          PUBLICATIONYEAR
+---------- ------------------------------ ---------------
+         1 Our Responsibility                        2017
+         2 School != Education                       2022
+
+SQL>
+SQL> -- Grouping with Properties
+SQL> SELECT A.Name AS Author, COUNT(*) AS NumberOfBooks
+  2  FROM Books B
+  3  JOIN Authors A ON B.AuthorID = A.AuthorID
+  4  GROUP BY A.Name;
+
+AUTHOR               NUMBEROFBOOKS
+-------------------- -------------
+Guru Rohith                      1
+Muthu Vivek                      2
+Balagan                          1
