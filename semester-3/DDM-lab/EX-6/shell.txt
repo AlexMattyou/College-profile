@@ -127,30 +127,3 @@ MEDICATIONID MEDICATION MEDICATIO MEDICATIO
 
          2 Sue                  15-FEB-23        102 Dr. Anderson    20-FEB-23
         1002 Med-B      18-FEB-23 25-FEB-23
-
-
-SQL>
-SQL> -- Don't do this, unless you want to !!!
-SQL> DROP VIEW HospitalView;
-
-View dropped.
-
-SQL> DROP TABLE MedicationAssignments;
-
-Table dropped.
-
-SQL> DROP TABLE Consultations;
-
-Table dropped.
-
-SQL> DROP TABLE Medications;
-
-Table dropped.
-
-SQL> DROP TABLE Doctors;
-
-Table dropped.
-
-SQL> DROP TABLE Patients;
-
-Table dropped.

@@ -30,16 +30,16 @@ class Book(Base):
 Base.metadata.create_all(engine)
 
 session = Session(engine)
-authors_data = [
+authorsData = [
     {"AuthorID": 1, "Name": "Guru Rohith"},
     {"AuthorID": 2, "Name": "Roger Samuel"},
 ]
-publishers_data = [
+publishersData = [
     {"PublisherID": 1, "Name": "Alpha"},
     {"PublisherID": 2, "Name": "Beta"},
     {"PublisherID": 3, "Name": "Gamma"},
 ]
-books_data = [
+booksData = [
     {"BookID": 1, "Title": "Our Responsibility", "AuthorID": 1, "PublisherID": 1, "PublicationYear": 2017},
     {"BookID": 2, "Title": "School != Education", "AuthorID": 2, "PublisherID": 2, "PublicationYear": 2022},
     {"BookID": 3, "Title": "Think Savant", "AuthorID": 2, "PublisherID": 1, "PublicationYear": 2020},
@@ -47,11 +47,11 @@ books_data = [
     {"BookID": 5, "Title": "Change Your Story", "AuthorID": 2, "PublisherID": 3, "PublicationYear": 2023},
 ]
 
-for author_data in authors_data:
+for author_data in authorsData:
     session.add(Author(**author_data))
-for publisher_data in publishers_data:
+for publisher_data in publishersData:
     session.add(Publisher(**publisher_data))
-for book_data in books_data:
+for book_data in booksData:
     session.add(Book(**book_data))
 
 session.commit()

@@ -78,14 +78,3 @@ EMPLOYEEID FIRSTNAME  LASTNAME   FULLADDRESS
          2 Sam        Dav        45 Oak St, cityB, NY
          3 Oshan      Abdul      78 Pine St, cityC, TX
          4 Harish     Babu       10 Cedar St, cityD, FL
-
-SQL> ----------------------------------------------------------
-SQL>
-SQL> -- Don't do this, unless you want to !!!
-SQL> DROP TABLE Employees;
-
-Table dropped.
-
-SQL> DROP TYPE AddressType FORCE;
-
-Type dropped.

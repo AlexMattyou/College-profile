@@ -54,15 +54,6 @@ SQL> INSERT INTO Courses VALUES (103, 'History', 3);
 1 row created.
 
 SQL>
-SQL> SELECT * FROM Courses;
-
-  COURSEID COURSENAME                     CREDITHOURS
----------- ------------------------------ -----------
-       101 Mathematics                              3
-       102 Computer Science                         4
-       103 History                                  3
-
-SQL>
 SQL> CREATE TABLE Enrollments (
   2      StudentID NUMBER,
   3      CourseID NUMBER,
@@ -102,15 +93,12 @@ SQL> CREATE OR REPLACE TRIGGER trg_check_enrollment
   4  DECLARE
   5      studentAge NUMBER;
   6  BEGIN
-  7      -- Retrieve student age
-  8      SELECT Age INTO studentAge FROM Students WHERE StudentID = :NEW.StudentID;
-  9
- 10      -- Check if the student is at least 18 years old
- 11      IF studentAge < 18 THEN
- 12          RAISE_APPLICATION_ERROR(-20001, 'Student must be at least 18 years old');
- 13      END IF;
- 14  END;
- 15  /
+  7      SELECT Age INTO studentAge FROM Students WHERE StudentID = :NEW.StudentID;
+  8      IF studentAge < 18 THEN
+  9          RAISE_APPLICATION_ERROR(-20001, 'Student must be at least 18 years old');
+ 10      END IF;
+ 11  END;
+ 12  /
 
 Trigger created.
 
@@ -130,31 +118,10 @@ SQL> CREATE OR REPLACE PROCEDURE GetStudentsByCourse(courseId NUMBER)
 Procedure created.
 
 SQL>
+SQL> SET SERVEROUTPUT ON;
 SQL> EXEC GetStudentsByCourse(101);
 StudentID: 1, FirstName: Daniel, LastName: Raja, Age: 20
 StudentID: 2, FirstName: Siva, LastName: Kumar, Age: 22
 StudentID: 3, FirstName: Muthu, LastName: Vivek, Age: 19
 
 PL/SQL procedure successfully completed.
-
-SQL>
-SQL> -- Don't do this, unless you want to !!!
-SQL> DROP PROCEDURE GetStudentsByCourse;
-
-Procedure dropped.
-
-SQL> DROP TRIGGER trg_check_enrollment;
-
-Trigger dropped.
-
-SQL> DROP TABLE Enrollments;
-
-Table dropped.
-
-SQL> DROP TABLE Students;
-
-Table dropped.
-
-SQL> DROP TABLE Courses;
-
-Table dropped.

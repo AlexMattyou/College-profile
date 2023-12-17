@@ -144,8 +144,8 @@ SQL> SELECT * FROM BooksInfo;
 TITLE                          AUTHOR               PUBLISHER  PUBLICATIONYEAR
 ------------------------------ -------------------- ---------- ---------------
 Our Responsibility             Guru Rohith          Alpha                 2017
-Think Savant                   Roger Samuel         Alpha                 2020
 School != Education            Roger Samuel         Beta                  2022
+Think Savant                   Roger Samuel         Alpha                 2020
 Chess of Life                  Guru Rohith          Gamma                 2019
 Change Your Story              Roger Samuel         Gamma                 2023
 Business Mindset               Balagan              Delta
@@ -167,8 +167,8 @@ SQL> SELECT * FROM BooksInfo;
 TITLE                          AUTHOR               PUBLISHER  PUBLICATIONYEAR
 ------------------------------ -------------------- ---------- ---------------
 Our Responsibility             Guru Rohith          Alpha                 2017
-Think Savant                   Muthu Vivek          Alpha                 2020
 School != Education            Muthu Vivek          Beta                  2022
+Think Savant                   Muthu Vivek          Alpha                 2020
 Chess of Life                  Guru Rohith          Gamma                 2019
 Change Your Story              Muthu Vivek          Gamma                 2023
 Entrepreneur Mindset           Balagan              Delta                 2021
@@ -186,8 +186,8 @@ SQL> SELECT * FROM BooksInfo;
 TITLE                          AUTHOR               PUBLISHER  PUBLICATIONYEAR
 ------------------------------ -------------------- ---------- ---------------
 Our Responsibility             Guru Rohith          Alpha                 2017
-Think Savant                   Muthu Vivek          Alpha                 2020
 School != Education            Muthu Vivek          Beta                  2022
+Think Savant                   Muthu Vivek          Alpha                 2020
 Entrepreneur Mindset           Balagan              Delta                 2021
 
 SQL>

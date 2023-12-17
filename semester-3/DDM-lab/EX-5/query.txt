@@ -23,8 +23,6 @@ INSERT INTO Courses VALUES (101, 'Mathematics', 3);
 INSERT INTO Courses VALUES (102, 'Computer Science', 4);
 INSERT INTO Courses VALUES (103, 'History', 3);
 
-SELECT * FROM Courses;
-
 CREATE TABLE Enrollments (
     StudentID NUMBER,
     CourseID NUMBER,
@@ -45,10 +43,7 @@ FOR EACH ROW
 DECLARE
     studentAge NUMBER;
 BEGIN
-    -- Retrieve student age
     SELECT Age INTO studentAge FROM Students WHERE StudentID = :NEW.StudentID;
-
-    -- Check if the student is at least 18 years old
     IF studentAge < 18 THEN
         RAISE_APPLICATION_ERROR(-20001, 'Student must be at least 18 years old');
     END IF;
@@ -67,6 +62,7 @@ BEGIN
 END;
 /
 
+SET SERVEROUTPUT ON;
 EXEC GetStudentsByCourse(101);
 
 -- Don't do this, unless you want to !!!
