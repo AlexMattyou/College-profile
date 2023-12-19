@@ -1,7 +1,6 @@
 from pgmpy.models import BayesianNetwork
 from pgmpy.factors.discrete import TabularCPD
 from pgmpy.inference import VariableElimination
-import pandas as pd
 
 model = BayesianNetwork([('Rain', 'Traffic_Jam'), ('Accident', 'Traffic_Jam')])
 
