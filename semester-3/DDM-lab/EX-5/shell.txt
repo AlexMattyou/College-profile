@@ -35,7 +35,7 @@ SQL> CREATE TABLE Courses (
   2      CourseID NUMBER PRIMARY KEY,
   3      CourseName VARCHAR2(30),
   4      CreditHours NUMBER,
-  5      CONSTRAINT chk_credit CHECK (CreditHours > 0) -- Constraint for positive credit hours
+  5      CONSTRAINT chk_credit CHECK (CreditHours > 0)
   6  );
 
 Table created.
