@@ -1,0 +1,51 @@
+ID,Thread,Date,From,To,Subject,Snippet,Labels
+u5f7g3i9w4pl,u5f7g3i9w4pl,2023-12-15,harry@google.com,tara@google.com,Task Assignment,"You have been assigned a new task. Please check the details on the dashboard.",Work
+d4z6p2r5f3wg,d4z6p2r5f3wg,2023-12-16,tara@google.com,harry@google.com,Re: Task Assignment,"Got it. Will start working on it soon.",Work
+c3j6r4f8w7le,c3j6r4f8w7le,2023-12-17,quinn@google.com,gina@google.com,Report Submission,"Please submit your report by Dec 20th.",Work
+s9f4l7g5s6tj,s9f4l7g5s6tj,2023-12-18,gina@google.com,quinn@google.com,Re: Report Submission,"Sure. I'm almost done with it.",Work
+b2f5g4i6w8pl,b2f5g4i6w8pl,2023-12-19,harry@google.com,tara@google.com,Thank You Note,"Thank you for your help with the project. You did a great job!",Work
+g8z3p7r4f6wg,g8z3p7r4f6wg,2023-12-20,tara@google.com,harry@google.com,Re: Thank You Note,"You're welcome. It was a pleasure working with you.",Work
+a1j5r3f7w9le,a1j5r3f7w9le,2023-12-21,uma@google.com,harry@google.com,Question,"I have a question about the app. How do I change the settings?",Question
+r7f6l9g8s4tj,r7f6l9g8s4tj,2023-12-22,harry@google.com,uma@google.com,Re: Question,"To change the settings, go to the menu and tap on the gear icon.",Answer
+h4f9g2i7w5pl,h4f9g2i7w5pl,2023-12-23,iris@google.com,uma@google.com,Complaint,"I'm not happy with the service. The app keeps crashing.",Complaint
+l6z5p4r9f2wg,l6z5p4r9f2wg,2023-12-24,uma@google.com,iris@google.com,Re: Complaint,"We apologize for the inconvenience. We are working on fixing the issue.",Apology
+k5j8r2f6w3le,k5j8r2f6w3le,2023-12-25,tara@google.com,gina@google.com,Greeting,"Merry Christmas! Hope you have a wonderful day!",Greeting
+t9f7l4g3s5tj,t9f7l4g3s5tj,2023-12-26,gina@google.com,tara@google.com,Re: Greeting,"Merry Christmas to you too! Thanks for the kind wishes.",Greeting
+v3f6g5i4w7pl,v3f6g5i4w7pl,2023-12-27,gina@google.com,bella@google.com,Order Confirmation,"Your order has been confirmed. It will be shipped soon.",Order
+n8z2p6r7f9wg,n8z2p6r7f9wg,2023-12-28,bella@google.com,gina@google.com,Re: Order Confirmation,"Great! Thank you for the update.",Order
+m7j3r5f4w6le,m7j3r5f4w6le,2023-12-29,clara@google.com,gina@google.com,Job Offer,"We are pleased to offer you a position at our company. Please see the attached contract.",Job
+s2f9l8g7s3tj,s2f9l8g7s3tj,2023-12-30,gina@google.com,clara@google.com,Re: Job Offer,"I'm thrilled to accept the offer. I have signed the contract and sent it back.",Job
+u4f5g3i6w2pl,u4f5g3i6w2pl,2023-12-31,emma@google.com,gina@google.com,New Year Wish,"Happy New Year! Wishing you all the best for 2024!",Wish
+d9z7p5r6f8wg,d9z7p5r6f8wg,2024-01-01,gina@google.com,emma@google.com,Re: New Year Wish,"Happy New Year to you too! Thank you for the lovely message.",Wish
+c8j4r6f7w5le,c8j4r6f7w5le,2024-01-02,gina@google.com,gina@google.com,Appointment Reminder,"Your appointment is scheduled for tomorrow at 11 AM. Please confirm your attendance.",Appointment
+r5f4l6g9s7tj,r5f4l6g9s7tj,2024-01-03,gina@google.com,gina@google.com,Re: Appointment Reminder,"Confirmed. I'll be there on time.",Appointment
+p6f3g7i5w4pl,p6f3g7i5w4pl,2024-01-04,iris@google.com,harry@google.com,Test Results,"Your test results are ready. Please check the attachment.",Test
+h2z9p4r8f3wg,h2z9p4r8f3wg,2024-01-05,harry@google.com,iris@google.com,Re: Test Results,"Thank you. I have downloaded the file.",Test
+o9j5r2f4w7le,o9j5r2f4w7le,2024-01-06,iris@google.com,tara@google.com,Birthday Wish,"Happy birthday! Hope you have a wonderful day!",Wish
+d7f5l3g6s8tj,d7f5l3g6s8tj,2024-01-07,tara@google.com,iris@google.com,Re: Birthday Wish,"Thank you so much! I appreciate your kind words.",Wish
+q3f8g4i7w6pl,q3f8g4i7w6pl,2024-01-08,mia@google.com,noah@google.com,Travel Plans,"I have booked the tickets for our trip. Please see the details below.",Travel
+l4z6p3r5f7wg,l4z6p3r5f7wg,2024-01-09,noah@google.com,mia@google.com,Re: Travel Plans,"Awesome! I'm so excited for our trip.",Travel
+n2j9r4f5w8le,n2j9r4f5w8le,2024-01-10,grace@google.com,grace@google.com,Technical Issue,"I'm having trouble with the app. It won't load properly.",Issue
+s5f7l8g9s4tj,s5f7l8g9s4tj,2024-01-11,grace@google.com,grace@google.com,Re: Technical Issue,"Please try uninstalling and reinstalling the app. That might solve the problem.",Solution
+r8f6g5i3w9pl,r8f6g5i3w9pl,2024-01-12,clara@google.com,bella@google.com,Meeting Cancellation,"I'm sorry to inform you that the meeting has been cancelled due to unforeseen circumstances.",Work
+g3z7p6r4f2wg,g3z7p6r4f2wg,2024-01-13,bella@google.com,clara@google.com,Re: Meeting Cancellation,"That's unfortunate. Thanks for letting me know.",Work
+m9j4r7f3w5le,m9j4r7f3w5le,2024-01-14,clara@google.com,clara@google.com,Job Application,"Thank you for applying for the position of software engineer. We will get back to you soon.",Joblication
+d6f4l7g2s3tj,d6f4l7g2s3tj,2024-01-15,clara@google.com,clara@google.com,Re: Job Application,"You're welcome. I look forward to hearing from you.",Job
+u7f5g6i4w2pl,u7f5g6i4w2pl,2024-01-16,clara@google.com,grace@google.com,Product Review,"Please leave a review for the product you purchased. Your feedback is valuable to us.",Review
+n5z4p7r3f6wg,n5z4p7r3f6wg,2024-01-17,grace@google.com,clara@google.com,Re: Product Review,"Sure. I'll do it right away.",Review
+o4j8r6f9w7le,o4j8r6f9w7le,2024-01-18,clara@google.com,tara@google.com,Recommendation,"I recommend you to watch this movie. It's really good.",Recommendation
+s2f3l9g8s5tj,s2f3l9g8s5tj,2024-01-19,tara@google.com,clara@google.com,Re: Recommendation,"Thanks for the suggestion. I'll check it out.",Recommendation
+p9f4g3i5w6pl,p9f4g3i5w6pl,2024-01-20,grace@google.com,adam@google.com,Confirmation Code,"Your confirmation code is 123456. Please enter it to verify your account.",Code
+h7z3p5r6f4wg,h7z3p5r6f4wg,2024-01-21,adam@google.com,grace@google.com,Re: Confirmation Code,"I have entered the code. My account is verified.",Code
+q6j7r5f8w4le,q6j7r5f8w4le,2024-01-22,bella@google.com,charlie@google.com,Reminder,"Just a reminder that you have an appointment tomorrow at 9 AM.",Reminderointment
+d8f6l4g7s9tj,d8f6l4g7s9tj,2024-01-23,charlie@google.com,bella@google.com,Re: Reminder,"Thanks for the reminder. I'll be there on time.",Reminder
+r3f9g5i6w7pl,r3f9g5i6w7pl,2024-01-24,bella@google.com,emma@google.com,Follow Up,"I'm following up on our last conversation. Did you get a chance to look at the document I sent you?",Follow Up
+g6z2p9r7f5wg,g6z2p9r7f5wg,2024-01-25,emma@google.com,bella@google.com,Re: Follow Up,"Yes, I did. I have some comments and suggestions. I'll send them to you soon.",Follow Up
+m4j3r8f7w5le,m4j3r8f7w5le,2024-01-26,gina@google.com,grace@google.com,Thank You,"I just wanted to say thank you for your support. You are amazing.",Thank You
+s7f5l3g9s6tj,s7f5l3g9s6tj,2024-01-27,grace@google.com,gina@google.com,Re: Thank You,"You're very welcome. I'm glad I could help.",Thank You
+u8f7g6i9w3pl,u8f7g6i9w3pl,2024-01-28,harry@google.com,tara@google.com,Announcement,"We have some exciting news to share with you. We have launched a new feature on our app.",Announcement
+n9z5p8r6f7wg,n9z5p8r6f7wg,2024-01-29,tara@google.com,harry@google.com,Re: Announcement,"That's awesome! I can't wait to try it out.",Announcement
+o5j6r9f4w8le,o5j6r9f4w8le,2024-01-30,uma@google.com,harry@google.com,Apology,"I'm sorry for the delay in replying to your email. I was busy with some urgent work.",Apology
+d4f8l7g5s2tj,d4f8l7g5s2tj,2024-01-31,harry@google.com,uma@google.com,Re: Apology,"No worries. I understand. Thanks for getting back to me.",Apology
+r9f3g7i8w4pl,r9f3g7i8w4pl,2024-02-01,tara@google.com,mia@google.com,Confirmation,"Your order has been shipped. You can track it using the link below.",Order
+g5z4p6r9f3wg,g5z4p6r9f3wg,2024-02-02,mia@google.com,tara@google.com,Re: Confirmation,"Great! Thank you for the update.",Order
