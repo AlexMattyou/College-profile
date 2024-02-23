@@ -1,0 +1,52 @@
+import pathlib
+import pygubu
+from transformers import AutoModelForCausalLM, AutoTokenizer
+import torch
+PROJECT_PATH = pathlib.Path(__file__).parent
+PROJECT_UI = PROJECT_PATH / "chatbot.ui"
+
+class App:
+    def __init__(self, master=None):
+        self.builder = builder = pygubu.Builder()
+        builder.add_resource_path(PROJECT_PATH)
+        builder.add_from_file(PROJECT_UI)
+        # Main widget
+        self.mainwindow = builder.get_object("toplevel1", master)
+        builder.import_variables(
+            self, ['b1', 'y1', 'b2', 'y2', 'b3', 'y3', 'b4', 'y4', 'messageInp'])
+        self.b1.set("Hello")
+        self.model_name = "microsoft/DialoGPT-large"
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name, padding_side='left')
+        self.model = AutoModelForCausalLM.from_pretrained(self.model_name)
+
+        builder.connect_callbacks(self)
+
+    def setText(self, you, bot):
+        objy = (self.y1, self.y2, self.y3, self.y4)
+        objb = (self.b1, self.b2, self.b3, self.b4)
+        for i in range(3, 0, -1):
+            objy[i].set(objy[i-1].get())
+            objb[i].set(objb[i-1].get())
+        objy[0].set(you)
+        objb[0].set(bot)
+    def run(self):
+        self.mainwindow.mainloop()
+
+    def send(self):
+        you = self.messageInp.get()
+        chatHistoryIds = None
+        bot, chatHistoryIds = self.chat(text = you, chatHistoryIds=chatHistoryIds)
+        self.setText(you,bot)
+        
+    def chat(self, text, chatHistoryIds=None):
+        inputIds = self.tokenizer.encode(text + self.tokenizer.eos_token, return_tensors="pt")
+        bot_inputIds = torch.cat([chatHistoryIds, inputIds], dim=-1) if chatHistoryIds is not None else inputIds
+        chatHistoryIds = self.model.generate(bot_inputIds, max_length=1000, pad_token_id=self.tokenizer.eos_token_id)
+        output = self.tokenizer.decode(chatHistoryIds[:, bot_inputIds.shape[-1]:][0], skip_special_tokens=True)
+        return output, chatHistoryIds
+
+app = App()
+app.run()
+
+
+
