@@ -26,3 +26,12 @@ num_coins, coin_sequence = min_coins(coins, amount)
 # Print the result
 print("Optimal number of coins:", num_coins)
 print("Sequence of coins used:", coin_sequence)
+
+
+'''
+output:
+
+Optimal number of coins: 2
+Sequence of coins used: [4, 4]
+
+'''

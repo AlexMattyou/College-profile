@@ -34,3 +34,12 @@ graph = {
 
 print("Topological Sorting Order:")
 print(topological_sort(graph))
+
+
+'''
+output:
+
+Topological Sorting Order:
+['D', 'A', 'E', 'G', 'F', 'B', 'C']
+
+'''

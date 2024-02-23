@@ -31,14 +31,19 @@ def heap_sort(arr):
 
 
 # Example list of elements
-elements = [4, 8, 2, 7, 19, 22, 3, 5, 9]
+elements = [8,18,10,9,20,4,3,6,5]
 
 print("Original list:", elements)
 
 # Perform heap sort
-try:
-    heap_sort(elements)
-except Exception as e:
-    elements.sort()
+heap_sort(elements)
 
 print("Sorted list:", elements)
+
+'''
+output:
+
+Original list: [8, 18, 10, 9, 20, 4, 3, 6, 5]
+Sorted list: [3, 4, 5, 6, 8, 9, 10, 18, 20]
+
+'''

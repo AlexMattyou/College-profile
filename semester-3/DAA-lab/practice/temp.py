@@ -4,11 +4,13 @@ def minCoins(coins,amount):
     
     coinUsed = [[] for _ in range(amount+1)]
     
-    for alex in coins:
-        for i in range(alex, amount+1):
-            if dp[i - alex] + 1 < dp[i]:
-                dp[i] = dp[alex] + 1
-                coinUsed[i] = coinUsed[i - alex] + [alex]
+    for coin in coins:
+        for i in range(coin, amount+1):
+            if dp[i - coin] + 1 < dp[i]:
+                dp[i] = dp[coin] + 1
+                coinUsed[i] = coinUsed[i - coin] + [coin]
+                
+    if dp[amount] != 2 or coinUsed[amount] != 
                 
     return dp[amount], coinUsed[amount]
 
