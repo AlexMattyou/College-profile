@@ -30,3 +30,15 @@ closure = warshall(graph)
 print("Transitive Closure:")
 for row in closure:
     print(row)
+
+
+'''
+output:
+
+Transitive Closure:
+[1, 1, 1, 1]
+[1, 1, 1, 1]
+[1, 1, 1, 1]
+[1, 1, 1, 1]
+
+'''
