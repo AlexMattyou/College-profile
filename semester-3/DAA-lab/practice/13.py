@@ -53,3 +53,16 @@ huffman_codes = encode_huffman_tree(huffman_tree)
 print("Huffman Codes:")
 for char, code in huffman_codes.items():
     print(char + ":", code)
+
+'''
+output:
+
+Huffman Codes:
+E: 00
+B: 01
+D: 10
+A: 1100
+F: 1101
+C: 111
+
+'''

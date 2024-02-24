@@ -34,9 +34,26 @@ G = [[0, 6, 0, 0, 0, 0, 0, 9, 0],
      [9, 11, 0, 0, 0, 0, 1, 0, 7],
      [0, 0, 2, 0, 0, 0, 6, 7, 0]]
 
-source_node = 0  # Source node index
+source_node = 0 # Source node index
 
 shortest_distances = dijkstra(G, source_node)
 print("Shortest distances from source node {}:".format(source_node))
 for i, distance in enumerate(shortest_distances):
     print("Node {}: {}".format(i, distance))
+    
+    
+'''
+output:
+
+Shortest distances from source node 0:
+Node 0: 0
+Node 1: 6
+Node 2: 14
+Node 3: 21
+Node 4: 22
+Node 5: 12
+Node 6: 10
+Node 7: 9
+Node 8: 16
+
+'''
