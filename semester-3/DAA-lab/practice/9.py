@@ -1,7 +1,7 @@
-def floyd_warshall(adjacency_matrix):
-    n = len(adjacency_matrix)
+def floyd_warshall(graph):
+    n = len(graph)
     # Initialize the distance matrix with the adjacency matrix
-    distance = [[adjacency_matrix[i][j] for j in range(n)] for i in range(n)]
+    distance = [[graph[i][j] for j in range(n)] for i in range(n)]
 
     # Iterate over intermediate vertices
     for k in range(n):
@@ -15,7 +15,7 @@ def floyd_warshall(adjacency_matrix):
     return distance
 
 # Given adjacency matrix
-adjacency_matrix = [
+graph = [
     [0, 5, float('inf'), float('inf'), 10, float('inf')],
     [float('inf'), 0, 7, 12, float('inf'), float('inf')],
     [float('inf'), float('inf'), 0, 8, float('inf'), float('inf')],
@@ -25,7 +25,7 @@ adjacency_matrix = [
 ]
 
 # Compute shortest paths using Floyd's Algorithm
-shortest_paths = floyd_warshall(adjacency_matrix)
+shortest_paths = floyd_warshall(graph)
 
 # Print shortest paths
 print("Shortest Paths between Every Pair of Vertices:")
