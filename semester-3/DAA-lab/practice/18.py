@@ -46,7 +46,7 @@ program is wrong
 
 expacted output:
 
-Minimum Cost: 24
+Minimum Cost: 21
 Optimal Assignment:
 
 Employee1 -> Job3

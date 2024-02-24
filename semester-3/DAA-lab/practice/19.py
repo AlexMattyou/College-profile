@@ -4,7 +4,7 @@ refer 18.py
 program is wrong:
 correct output:
 
-Minimum Cost: 21
+Minimum Cost: 23
 Optimal Assignment:
 
 Person1 -> Job2

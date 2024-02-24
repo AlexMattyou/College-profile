@@ -70,3 +70,16 @@ def solve_n_queens_problem(n):
 
 # Solve the N-Queens problem for 5 queens
 solve_n_queens_problem(5)
+
+
+'''
+output:
+
+Solution:
+1 0 0 0 0
+0 0 0 1 0
+0 1 0 0 0
+0 0 0 0 1
+0 0 1 0 0
+
+'''

@@ -29,3 +29,15 @@ print("Solution:")
 print("Acres of corn planted:", acres_of_corn_planted)
 print("Acres of soybeans planted:", acres_of_soybeans_planted)
 print("Maximum profit: $", max_profit)
+
+
+'''
+output:
+
+Solution:
+Acres of corn planted: 105.36082474226805
+Acres of soybeans planted: 215.2577319587629
+Maximum profit: $ 26010.92783505155
+
+
+'''
