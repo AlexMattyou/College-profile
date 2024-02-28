@@ -39,10 +39,11 @@ def display(p):
         print(i, "= ", ans[i])
     print()
 
-puzzle1 = ["HERE", "SHE", "COMES"]
+puzzle1 = ["TWO", "TWO", "FOUR"]
 puzzle2 = ["SEND", "MORE", "MONEY"]
+puzzle3 = ["CROSS", "ROADS", "DANGER"]
 
 display(puzzle1)
 display(puzzle2)
-
+display(puzzle3)
 
