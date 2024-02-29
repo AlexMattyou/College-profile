@@ -42,8 +42,10 @@ def display(p):
 puzzle1 = ["TWO", "TWO", "FOUR"]
 puzzle2 = ["SEND", "MORE", "MONEY"]
 puzzle3 = ["CROSS", "ROADS", "DANGER"]
+puzzle4 = ["BASE", "BALL", "GAMES"]
 
 display(puzzle1)
 display(puzzle2)
 display(puzzle3)
+display(puzzle4)
 

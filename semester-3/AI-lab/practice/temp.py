@@ -1,49 +1,60 @@
-def cryptoSolver(p):
-    out = {}
-    chars = set(c for w in p for c in w)
-    if len(chars) > 10:
-        raise ValueError("The number of unique characters exceeds 10.")
-    digits = {}
+import heapq
 
-    def isValid():
-        return all((w[0] not in digits) or (digits[w[0]] != 0) for w in p)
+class Graph:
+    def __init__(self):
+        self.edges = {}
 
-    def convNum(word):
-        return int("".join(str(digits[c]) for c in word))
+    def add_edge(self, start, end, cost):
+        if start not in self.edges:
+            self.edges[start] = []
+        self.edges[start].append((end, cost))
 
-    def backtrack(index):
-        if index == len(chars):
-            return sum(convNum(w) for w in p[:-1]) == convNum(p[-1])
-        char = list(chars)[index]
-        for digit in range(10):
-            if digit not in digits.values():
-                digits[char] = digit
-                if isValid() and backtrack(index + 1):
-                    return True
-                digits.pop(char)
-        return False
+def astar(graph, start, goal, heuristic):
+    frontier = [(0, start)]
+    came_from = {}
+    cost_so_far = {start: 0}
 
-    if backtrack(0):
-        SAssignments = sorted(digits.items(), key=lambda x: x[0])
-        for c, value in SAssignments:
-            out[c] = value
-    else:
-        print("No solution found.")
-    return out
+    while frontier:
+        current_cost, current_node = heapq.heappop(frontier)
 
+        if current_node == goal:
+            break
 
-def display(p):
-    print(f"{p[0]} + {p[1]} = {p[2]}")
-    ans = cryptoSolver(p)
-    for i in ans:
-        print(i, "= ", ans[i])
-    print()
+        for next_node, cost in graph.edges[current_node]:
+            new_cost = cost_so_far[current_node] + cost
+            if next_node not in cost_so_far or new_cost < cost_so_far[next_node]:
+                cost_so_far[next_node] = new_cost
+                priority = new_cost + heuristic(next_node, goal)
+                heapq.heappush(frontier, (priority, next_node))
+                came_from[next_node] = current_node
 
-puzzle1 = ["TWO", "TWO", "FOUR"]
-puzzle2 = ["SEND", "MORE", "MONEY"]
-puzzle3 = ["CROSS", "ROADS", "DANGER"]
+    path = []
+    current_node = goal
+    while current_node != start:
+        path.append(current_node)
+        current_node = came_from[current_node]
+    path.append(start)
+    path.reverse()
 
-display(puzzle1)
-display(puzzle2)
-display(puzzle3)
+    return path
 
+# Example usage:
+
+def heuristic(node, goal):
+    return abs(node[0] - goal[0]) + abs(node[1] - goal[1])  # Manhattan distance heuristic
+
+graph = Graph()
+graph.add_edge((0, 0), (0, 1), 1)
+graph.add_edge((0, 1), (0, 2), 1)
+graph.add_edge((0, 2), (1, 2), 1)
+graph.add_edge((1, 2), (2, 2), 1)
+graph.add_edge((2, 2), (2, 1), 1)
+graph.add_edge((2, 1), (2, 0), 1)
+graph.add_edge((2, 0), (1, 0), 1)
+graph.add_edge((1, 0), (0, 0), 1)
+
+start = (0, 0)
+goal = (2, 2)
+
+path = astar(graph, start, goal, heuristic)
+print("Path:", path)
