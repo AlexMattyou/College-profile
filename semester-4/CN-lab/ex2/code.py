@@ -33,4 +33,13 @@ def download_webpage(url):
 
 url = input("Enter URL: ")
 download_webpage(url)
-# https://example.com
+
+
+'''
+OUTPUT:
+
+Enter URL: https://example.com
+Webpage downloaded and saved to webpage.html
+
+'''
+# file saved in webpage.html
