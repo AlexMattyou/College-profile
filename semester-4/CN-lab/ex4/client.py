@@ -3,16 +3,26 @@ import socket
 HOST = 'localhost'
 PORT = 53
 
-def resolve_domain(domain_name):
-  with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-    message = domain_name.encode()
-    s.sendto(message, (HOST, PORT))
-    data, server = s.recvfrom(1024)
-    return data.decode()
+def resolveDomain(domainName):
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+        message = domainName.encode()
+        s.sendto(message, (HOST, PORT))
+        data, _ = s.recvfrom(1024)
+        return data.decode()
 
-domain_name = input("Enter domain name: ")
-ip_address = resolve_domain(domain_name)
-if ip_address:
-  print(f"IP address for {domain_name}: {ip_address}")
+domainName = input("Enter domain name: ")
+ipAddress = resolveDomain(domainName)
+if ipAddress:
+    print(f"IP address for {domainName}: {ipAddress}")
 else:
-  print(f"Error: Domain not found")
+    print(f"Error: Domain not found")
+
+
+'''
+OUTPUT:
+
+Enter domain name: www.example.com
+IP address for www.example.com: 8.8.8.8
+
+
+'''

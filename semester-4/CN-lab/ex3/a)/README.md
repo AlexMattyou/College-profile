@@ -1,9 +1,11 @@
-<h2>Explanation:</h2>
+Algorithm:
 
-<ul>
-<li>The server binds to a specific port (65432 in this example) and listens for incoming connections.</li>
-<li>The client connects to the server's hostname or IP address on the specified port.</li>
-<li>The client sends a message to the server.</li>
-<li>The server receives the message, echoes it back to the client.</li>
-<li>The client receives the echoed message and prints it.</li>
-</ul>
+Server:
+Create and bind a socket to the specified host and port.
+Listen for incoming connections.
+Accept a connection and enter a loop to receive and echo data back to the client.
+
+Client:
+Create and connect a socket to the server.
+Send a message to the server and receive the echoed message.
+Print the received message.

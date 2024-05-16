@@ -1,7 +1,12 @@
-<h2>Explanation:</h2>
+Algorithm:
 
-<ul>
-<li>The chat server uses threads to handle multiple clients simultaneously.</li>
-<li>When a client connects, it's added to a list of clients.</li>
-<li>Each client sends messages to the server, and the server broadcasts those messages to all other connected clients.</li>
-</ul>
+Server:
+Create and bind a socket to the specified host and port.
+Listen for incoming connections and accept them in a loop.
+Spawn a new thread for each client connection to handle communication.
+Broadcast received messages to all connected clients except the sender.
+
+Client:
+Create and connect a socket to the server.
+Continuously read user input and send messages to the server.
+Receive and print messages broadcasted by the server.

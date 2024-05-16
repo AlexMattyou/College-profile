@@ -10,3 +10,12 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     data = s.recv(1024)
 
 print('Received:', data.decode())
+
+
+'''
+OUTPUT:
+
+Received: Hello, world!
+
+
+'''

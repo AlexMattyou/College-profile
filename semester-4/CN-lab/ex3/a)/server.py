@@ -17,3 +17,12 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             conn.sendall(data)
 
 print('Server closed')
+
+
+'''
+OUTPUT:
+
+Connected by ('127.0.0.1', 65432)
+
+
+'''
