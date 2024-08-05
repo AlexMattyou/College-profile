@@ -3,8 +3,11 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include <unistd.h>
+
 #define NUM_THREADS 5
+
 sem_t semaphore;
+
 void* thread_function(void* arg) {
     int thread_num = *((int*)arg);
     printf("Thread %d waiting to enter critical section...\n", thread_num);
@@ -16,26 +19,37 @@ void* thread_function(void* arg) {
     free(arg);
     return NULL;
 }
+
 int main() {
     pthread_t threads[NUM_THREADS];
+
     if (sem_init(&semaphore, 0, 1) != 0) {
         perror("sem_init");
         exit(EXIT_FAILURE);
     }
+
     for (int i = 0; i < NUM_THREADS; i++) {
-        int* thread_num = malloc(sizeof(int));
+        int* thread_num = (int*)malloc(sizeof(int));
+        if (thread_num == NULL) {
+            perror("malloc");
+            exit(EXIT_FAILURE);
+        }
         *thread_num = i + 1;
         if (pthread_create(&threads[i], NULL, thread_function, thread_num) != 0) {
             perror("pthread_create");
+            free(thread_num);  // Free memory if thread creation fails
             exit(EXIT_FAILURE);
         }
     }
+
     for (int i = 0; i < NUM_THREADS; i++) {
         pthread_join(threads[i], NULL);
     }
+
     sem_destroy(&semaphore);
     return 0;
 }
+
 
 
 /*
