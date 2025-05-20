@@ -1,0 +1,33 @@
+A51 MACRO ASSEMBLER  EX2_A                                                                05/20/2025 10:14:14 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\ex2-a.obj
+ASSEMBLER INVOKED BY: C:\Users\alexmatt\C51\BIN\A51.EXE Exercises\ex2-a.asm SET(SMALL) DEBUG PRINT(.\Listings\ex2-a.lst)
+                       OBJECT(.\Objects\ex2-a.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 C3                2     CLR C
+0001 7895              3     MOV R0, #95H
+0003 796F              4     MOV R1, #6FH
+0005 E8                5     MOV A, R0
+0006 F530              6     MOV 30H, A
+0008 E9                7     MOV A, R1
+0009 F531              8     MOV 31H, A
+                       9     END
+A51 MACRO ASSEMBLER  EX2_A                                                                05/20/2025 10:14:14 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

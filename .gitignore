@@ -1,0 +1,22 @@
+.venv/
+
+# Ignore common image formats
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.bmp
+*.tiff
+*.ico
+
+# Ignore other large file types (optional)
+*.mp4
+*.mov
+*.mkv
+*.zip
+*.tar
+*.rar
+*.psd
+*.ai
+*.iso

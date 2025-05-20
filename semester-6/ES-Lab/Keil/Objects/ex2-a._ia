@@ -1,0 +1,1 @@
+"Exercises\ex2-a.asm" SET (SMALL) DEBUG PRINT(.\Listings\ex2-a.lst) OBJECT(.\Objects\ex2-a.obj) EP
