@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  EX2_A                                                                05/20/2025 10:14:14 PAGE     1
+A51 MACRO ASSEMBLER  EX2_A                                                                05/27/2025 14:54:30 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -17,7 +17,7 @@ LOC  OBJ            LINE     SOURCE
 0008 E9                7     MOV A, R1
 0009 F531              8     MOV 31H, A
                        9     END
-A51 MACRO ASSEMBLER  EX2_A                                                                05/20/2025 10:14:14 PAGE     2
+A51 MACRO ASSEMBLER  EX2_A                                                                05/27/2025 14:54:30 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------
