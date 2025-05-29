@@ -1,4 +1,4 @@
 ".\Objects\STARTUP.obj",
-".\Objects\reg-swap.obj" 
+".\Objects\compare.obj" 
 TO ".\Objects\Project" 
 PRINT(".\Listings\Project.m51")

@@ -1,0 +1,54 @@
+A51 MACRO ASSEMBLER  COMPARE                                                              05/28/2025 11:16:45 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\compare.obj
+ASSEMBLER INVOKED BY: C:\Users\alexmatt\C51\BIN\A51.EXE Exercises\8051-exercises\compare.asm SET(SMALL) DEBUG PRINT(.\Li
+                      stings\compare.lst) OBJECT(.\Objects\compare.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H       ; Starting address
+                       2     
+0000 7425              3     MOV A, #25H     ; Load A with 0x25
+0002 75F030            4     MOV B, #30H     ; Load B with 0x30
+                       5     
+0005 C3                6     CLR C           ; Clear carry flag before subtraction
+0006 95F0              7     SUBB A, B       ; A = A - B (A = 0x25 - 0x30)
+                       8     
+0008 6004              9     JZ EQUAL        ; If result is zero, A == B
+000A 4006             10     JC LESS_THAN    ; If carry is set, A < B
+000C 8008             11     SJMP GREATER_THAN ; If no carry and not zero, A > B
+                      12     
+000E                  13     EQUAL:
+000E 7801             14         MOV R0, #01H   ; Set R0 = 1 (equal)
+0010 8006             15         SJMP DONE
+                      16     
+0012                  17     LESS_THAN:
+0012 7802             18         MOV R0, #02H   ; Set R0 = 2 (less than)
+0014 8002             19         SJMP DONE
+                      20     
+0016                  21     GREATER_THAN:
+0016 7803             22         MOV R0, #03H   ; Set R0 = 3 (greater than)
+                      23     
+0018                  24     DONE:
+                      25         END
+A51 MACRO ASSEMBLER  COMPARE                                                              05/28/2025 11:16:45 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+DONE . . . . . . .  C ADDR   0018H   A   
+EQUAL. . . . . . .  C ADDR   000EH   A   
+GREATER_THAN . . .  C ADDR   0016H   A   
+LESS_THAN. . . . .  C ADDR   0012H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

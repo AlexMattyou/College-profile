@@ -1,0 +1,55 @@
+A51 MACRO ASSEMBLER  ARITHMETIC_OPP                                                       05/28/2025 09:35:18 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\arithmetic-opp.obj
+ASSEMBLER INVOKED BY: C:\Users\alexmatt\C51\BIN\A51.EXE Exercises\8051-exercises\arithmetic-opp.asm SET(SMALL) DEBUG PRI
+                      NT(.\Listings\arithmetic-opp.lst) OBJECT(.\Objects\arithmetic-opp.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+                       2     
+                       3     ; ADDITION
+0000 7420              4     MOV A, #20H
+0002 2421              5     ADD A, #21H
+0004 F580              6     MOV P0, A      ; Store result in memory location 40H
+                       7     
+                       8     ; SUBTRACTION
+0006 7420              9     MOV A, #20H
+0008 C3               10     CLR C
+0009 9418             11     SUBB A, #18H
+000B F580             12     MOV P0, A      ; Store result in memory location 41H
+                      13     
+                      14     ; MULTIPLICATION
+000D 7403             15     MOV A, #03H
+000F 75F004           16     MOV B, #04H
+0012 A4               17     MUL AB
+0013 F580             18     MOV P0, A      ; Result lower byte
+0015 85F090           19     MOV P1, B      ; Result higher byte
+                      20     
+                      21     ; DIVISION
+0018 7495             22     MOV A, #95H
+001A 75F010           23     MOV B, #10H
+001D 84               24     DIV AB
+001E F580             25     MOV P0, A      ; Quotient
+0020 85F090           26     MOV P1, B      ; Remainder
+                      27     
+                      28     END
+A51 MACRO ASSEMBLER  ARITHMETIC_OPP                                                       05/28/2025 09:35:18 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

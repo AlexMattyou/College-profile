@@ -1,0 +1,1 @@
+"Exercises\8051-exercises\arithmetic-opp.asm" SET (SMALL) DEBUG PRINT(.\Listings\arithmetic-opp.lst) OBJECT(.\Objects\arithmetic-opp.obj) EP

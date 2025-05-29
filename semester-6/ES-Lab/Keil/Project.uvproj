@@ -382,9 +382,9 @@
               <FilePath>.\STARTUP.A51</FilePath>
             </File>
             <File>
-              <FileName>reg-swap.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Exercises\c-exercises\reg-swap.c</FilePath>
+              <FileName>compare.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Exercises\8051-exercises\compare.asm</FilePath>
             </File>
           </Files>
         </Group>
